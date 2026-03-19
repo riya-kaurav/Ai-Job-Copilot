@@ -10,11 +10,6 @@
 
 AI Job Copilot is a **full-stack SaaS application** that transforms job searching from a chaotic spreadsheet exercise into an intelligent, data-driven workflow. It combines a beautiful dark-mode UI with powerful AI features to give you a real edge in your job search.
 
-This project is built to be:
-- 🎓 **Internship/junior-level portfolio quality**
-- 🏗️ **Architecturally sound** (feature-based structure, clean separation of concerns)
-- 🤖 **AI-first** (OpenAI GPT-4o integration across 6 features)
-- 💎 **Visually impressive** (premium dark SaaS design system)
 
 ---
 
@@ -279,16 +274,7 @@ The UI is built on a **custom premium dark theme**:
 
 ---
 
-## 📄 License
-
-MIT License — feel free to use this for your portfolio, learning, or as a starter for your own projects.
-
----
 
 <div align="center">
   <p>Built with ❤️ and a lot of ☕ | AI Job Copilot</p>
-  <p>
-    <a href="/login">Try Demo</a> ·
-    <a href="https://github.com">GitHub</a> ·
-    <a href="mailto:you@example.com">Contact</a>
-  </p>
+  
