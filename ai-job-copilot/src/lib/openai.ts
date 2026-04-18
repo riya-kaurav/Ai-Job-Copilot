@@ -4,7 +4,7 @@
 // Uses GPT-4o with structured prompts for reliable JSON output.
 // ============================================================
 
-import OpenAI from 'openai'
+// import OpenAI from 'openai'
 import type {
   MatchAnalysis,
   NextAction,
@@ -15,34 +15,78 @@ import type {
   DashboardStats,
 } from '@/types'
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+// // Initialize OpenAI client
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// })
 
-const MODEL = process.env.OPENAI_MODEL || 'gpt-4o'
+// const MODEL = process.env.OPENAI_MODEL || 'gpt-4o'
 
-// --- Helper: Parse JSON from AI response ---
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY!
+
+const MODEL = 'meta-llama/llama-3-8b-instruct' // free model
+
 function parseJSON<T>(text: string): T {
-  // Strip markdown code fences if present
-  const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
-  return JSON.parse(clean) as T
+  try {
+    const clean = text
+      .replace(/```json\n?/g, '')
+      .replace(/```\n?/g, '')
+      .trim()
+
+    return JSON.parse(clean) as T
+  } catch (err) {
+    console.error('JSON Parse Error:', text)
+    throw new Error('Invalid AI response format')
+  }
 }
 
-// --- Helper: Safe AI call with error handling ---
+// // --- Helper: Safe AI call with error handling ---
+// async function askAI(systemPrompt: string, userPrompt: string): Promise<string> {
+//   const response = await openai.chat.completions.create({
+//     model: MODEL,
+//     messages: [
+//       { role: 'system', content: systemPrompt },
+//       { role: 'user', content: userPrompt },
+//     ],
+//     temperature: 0.7,
+//     max_tokens: 1500,
+//   })
+//   return response.choices[0]?.message?.content || ''
+// }
+
 async function askAI(systemPrompt: string, userPrompt: string): Promise<string> {
-  const response = await openai.chat.completions.create({
-    model: MODEL,
-    messages: [
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: userPrompt },
-    ],
-    temperature: 0.7,
-    max_tokens: 1500,
-  })
-  return response.choices[0]?.message?.content || ''
-}
+  try {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'http://localhost:3000',
+        'X-Title': 'AI Job Copilot',
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+      }),
+    })
 
+    const data = await response.json()
+
+    console.log('AI RAW RESPONSE:', data)
+
+    if (!data?.choices?.[0]?.message?.content) {
+      throw new Error('No AI response')
+    }
+
+    return data.choices[0].message.content
+  } catch (err) {
+    console.error('[AI ERROR]', err)
+    return '{}' // prevents crash
+  }
+}
 // ============================================================
 // FEATURE 1: SMART MATCH SCORE
 // Analyzes job description against user resume
