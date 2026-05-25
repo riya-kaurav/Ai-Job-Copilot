@@ -1,4 +1,4 @@
-# AI Job Copilot
+#   AI Job Copilot
 
 > **Your Intelligent Career OS** — An AI-powered job search assistant that tracks applications, analyzes job fit, and tells you exactly what to do next.
 
