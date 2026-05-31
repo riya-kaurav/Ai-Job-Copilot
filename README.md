@@ -62,7 +62,7 @@ AI Job Copilot is a **full-stack SaaS application** that transforms job searchin
 | **Backend** | Next.js API Route Handlers |
 | **Database** | MongoDB (Mongoose ODM) |
 | **Auth** | JWT (jsonwebtoken + bcryptjs) |
-| **AI** | OpenAI GPT-4o |
+| **AI** | Open Router Api |
 | **Charts** | Recharts |
 | **DnD** | @dnd-kit/core + @dnd-kit/sortable |
 | **Fonts** | Syne (display) + DM Sans (body) + JetBrains Mono |
@@ -168,7 +168,7 @@ Edit `.env.local`:
 MONGODB_URI=mongodb+srv://...
 JWT_SECRET=your-secret-key-min-32-chars
 JWT_REFRESH_SECRET=your-refresh-secret-min-32-chars
-OPENAI_API_KEY=sk-proj-...
+LLM_API_KEY=sk-proj-...
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
@@ -195,7 +195,7 @@ Navigate to `/signup`, create an account. No email verification required in deve
 | `NEXT_PUBLIC_APP_URL` | ✅ | Your app's base URL |
 | `JWT_ACCESS_EXPIRY` | ❌ | Access token expiry (default: `15m`) |
 | `JWT_REFRESH_EXPIRY` | ❌ | Refresh token expiry (default: `7d`) |
-| `OPENAI_MODEL` | ❌ | OpenAI model to use (default: `gpt-4o`) |
+| `AI_MODEL` | ❌ | AI model to use |
 
 ---
 
