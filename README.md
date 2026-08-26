@@ -276,5 +276,5 @@ The UI is built on a **custom premium dark theme**:
 
 
 <div align="center">
-  <p>Built with ❤️ and a lot of ☕ | AI Job Copilot</p>
+  <p>Built with ❤️ | AI Job Copilot</p>
   
