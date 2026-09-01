@@ -270,7 +270,7 @@ The UI is built on a **custom premium dark theme**:
 3. **DnD-kit** — building accessible drag-and-drop that works on touch devices
 4. **Mongoose connection caching** — preventing hot-reload from spawning too many DB connections
 5. **Zustand with persistence** — persisting auth state across page refreshes without Redux complexity
-6. **Next.js App Router patterns** — route handlers, server components, client components
+6. **Next.js App Router patterns** — route handlers, server components, client components.
 
 ---
 
